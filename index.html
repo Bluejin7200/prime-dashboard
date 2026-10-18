@@ -135,7 +135,8 @@ window.__PM_DATA = {"monthly": [{"month": "2025-01", "m1": 23, "m6": 15, "m12": 
 .pm-empty { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); padding: var(--cds-pad-md) 0; }
 .pm-def { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
 .pm-def summary { cursor: pointer; color: var(--color-fg); }
-.pm-head-right { display: grid; gap: 10px; justify-items: start; }
+.pm-head-right { display: grid; gap: 10px; justify-items: end; width: max-content; max-width: 100%; }
+.pm-head-right .pm-seg-wrap { justify-self: stretch; }
 .pm-pdf { display: inline-flex; align-items: center; gap: 6px; font-size: var(--cds-font-size-caption); font-weight: 600; color: #2b2b2b; background: #ffffff; border-radius: 999px; padding: 7px 14px; text-decoration: none; }
 .pm-pdf:hover { background: #dbb6ff; }
 .pm-pdf svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
@@ -181,7 +182,7 @@ window.__PM_DATA = {"monthly": [{"month": "2025-01", "m1": 23, "m6": 15, "m12": 
         <button type="button" data-q="2025-Q3">2025년 3분기</button>
       </div>
     </div>
-      <a class="pm-pdf" href="prime-membership-2026-Q3.pdf" download="에세네프라임_멤버십현황_2026-3분기.pdf"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg>PDF 다운로드</a>
+      <a class="pm-pdf" href="prime-membership-2026-Q3.pdf" download="에세네프라임_멤버십현황_2026-3분기.pdf"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg>주요 현황표 다운로드</a>
     </div>
   </header>
 
