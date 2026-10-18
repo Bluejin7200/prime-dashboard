@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>프라임 멤버십 현황</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex, nofollow">
+
+<style>
+:root{
+ --font-anthropic-sans: "Pretendard","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;
+ --font-anthropic-serif: "Noto Serif KR","Apple SD Gothic Neo",Georgia,serif;
+ --cds-font-size-caption: 0.8125rem; --cds-font-size-body: 0.9375rem; --cds-font-size-heading: 1.0625rem; --cds-font-size-title: 1.5rem;
+ --cds-font-weight-medium: 600;
+ --cds-gap-xs:4px; --cds-gap-sm:8px; --cds-gap-md:12px; --cds-gap-lg:20px; --cds-gap-xl:32px;
+ --cds-pad-xs:4px; --cds-pad-sm:8px; --cds-pad-md:14px; --cds-pad-lg:18px; --cds-pad-xl:28px;
+ --cds-radius:10px; --cds-dur-slow:.3s;
+ --color-bg:#f7f6fa; --color-fg:#1f1d24; --color-fg-muted:#6b6875; --color-panel:#ffffff; --color-border-line:#e4e1ea;
+ --color-ok:#1f8a4c; --color-bad:#c4372f;
+ --cds-chart-grid:#ece9f1; --cds-chart-reference:#9a96a3; --cds-chart-muted:#b9b5c2;
+ --cds-chart-status-good:#2f9e5b; --cds-chart-status-critical:#d0493f;
+ --cds-surface-popover:#ffffff; --cds-border:#e4e1ea; --cds-shadow-popover:0 6px 20px -6px rgba(0,0,0,.25); --cds-text-secondary:#6b6875;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+ --color-bg:#141317; --color-fg:#f1eff5; --color-fg-muted:#a29fab; --color-panel:#1e1c22; --color-border-line:#33303a;
+ --color-ok:#5fd08f; --color-bad:#ff7a70; --cds-chart-grid:#2c2a31; --cds-chart-reference:#7d7987; --cds-chart-muted:#5f5b68;
+ --cds-chart-status-good:#4cc27e; --cds-chart-status-critical:#f06a60; --cds-surface-popover:#26242b; --cds-border:#3a3741; --cds-text-secondary:#a29fab; color-scheme:dark; } }
+:root[data-theme="dark"]{
+ --color-bg:#141317; --color-fg:#f1eff5; --color-fg-muted:#a29fab; --color-panel:#1e1c22; --color-border-line:#33303a;
+ --color-ok:#5fd08f; --color-bad:#ff7a70; --cds-chart-grid:#2c2a31; --cds-chart-reference:#7d7987; --cds-chart-muted:#5f5b68;
+ --cds-chart-status-good:#4cc27e; --cds-chart-status-critical:#f06a60; --cds-surface-popover:#26242b; --cds-border:#3a3741; --cds-text-secondary:#a29fab; color-scheme:dark; }
+body{ background:var(--color-bg); color:var(--color-fg); font-family:var(--font-anthropic-sans); }
+.pm-shell{ padding-block:20px 40px; padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px)); }
+.pm b{ font-weight:600; }
+.pm-tabs{ top: env(safe-area-inset-top, 0px) !important; }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+</head>
+<body>
+<script>
+window.__PM_DATA = {"monthly": [{"month": "2025-01", "m1": 23, "m6": 15, "m12": 33, "total": 71, "no_hs": 13}, {"month": "2025-02", "m1": 22, "m6": 12, "m12": 31, "total": 65, "no_hs": 12}, {"month": "2025-03", "m1": 21, "m6": 9, "m12": 33, "total": 63, "no_hs": 11}, {"month": "2025-04", "m1": 20, "m6": 7, "m12": 35, "total": 62, "no_hs": 12}, {"month": "2025-05", "m1": 31, "m6": 11, "m12": 37, "total": 79, "no_hs": 17}, {"month": "2025-06", "m1": 37, "m6": 13, "m12": 35, "total": 85, "no_hs": 19}, {"month": "2025-07", "m1": 27, "m6": 16, "m12": 30, "total": 73, "no_hs": 15}, {"month": "2025-08", "m1": 27, "m6": 17, "m12": 32, "total": 76, "no_hs": 15}, {"month": "2025-09", "m1": 26, "m6": 17, "m12": 31, "total": 74, "no_hs": 14}, {"month": "2025-10", "m1": 28, "m6": 16, "m12": 32, "total": 76, "no_hs": 15}, {"month": "2025-11", "m1": 33, "m6": 15, "m12": 32, "total": 80, "no_hs": 17}, {"month": "2025-12", "m1": 32, "m6": 14, "m12": 32, "total": 78, "no_hs": 17}, {"month": "2026-01", "m1": 27, "m6": 14, "m12": 34, "total": 75, "no_hs": 18}, {"month": "2026-02", "m1": 19, "m6": 12, "m12": 34, "total": 65, "no_hs": 13}, {"month": "2026-03", "m1": 17, "m6": 11, "m12": 35, "total": 63, "no_hs": 12}, {"month": "2026-04", "m1": 22, "m6": 12, "m12": 35, "total": 69, "no_hs": 14}, {"month": "2026-05", "m1": 19, "m6": 8, "m12": 33, "total": 60, "no_hs": 11}, {"month": "2026-06", "m1": 21, "m6": 6, "m12": 32, "total": 59, "no_hs": 11}, {"month": "2026-07", "m1": 22, "m6": 5, "m12": 31, "total": 58, "no_hs": 11}, {"month": "2026-08", "m1": 23, "m6": 6, "m12": 30, "total": 59, "no_hs": 12}, {"month": "2026-09", "m1": 24, "m6": 7, "m12": 33, "total": 64, "no_hs": 13}], "flow": [{"quarter": "2025-Q3", "month": "2025-07", "start": 85, "new": 0, "rejoin": 1, "lapse_1m": 7, "lapse_long": 2, "late_out": 5, "late_in": 1, "end": 73}, {"quarter": "2025-Q3", "month": "2025-08", "start": 73, "new": 1, "rejoin": 2, "lapse_1m": 4, "lapse_long": 1, "late_out": 0, "late_in": 5, "end": 76}, {"quarter": "2025-Q3", "month": "2025-09", "start": 76, "new": 1, "rejoin": 6, "lapse_1m": 5, "lapse_long": 1, "late_out": 3, "late_in": 0, "end": 74}, {"quarter": "2026-Q3", "month": "2026-07", "start": 59, "new": 0, "rejoin": 6, "lapse_1m": 3, "lapse_long": 5, "late_out": 2, "late_in": 3, "end": 58}, {"quarter": "2026-Q3", "month": "2026-08", "start": 58, "new": 1, "rejoin": 3, "lapse_1m": 1, "lapse_long": 0, "late_out": 4, "late_in": 2, "end": 59}, {"quarter": "2026-Q3", "month": "2026-09", "start": 59, "new": 1, "rejoin": 4, "lapse_1m": 2, "lapse_long": 0, "late_out": 2, "late_in": 4, "end": 64}], "joins": [{"name": "김○아", "kind": "신규", "month": "2026-08", "plan": "1개월", "note": "유튜브 · 힐링스쿨 없음"}, {"name": "조○선", "kind": "신규", "month": "2026-09", "plan": "1개월", "note": "지인소개 · 힐링스쿨 없음"}, {"name": "이○희", "kind": "재가입", "month": "2026-07", "plan": "6개월", "note": "공백 약 3개월"}, {"name": "심○경", "kind": "재가입", "month": "2026-07", "plan": "1개월", "note": "공백 약 2개월 · 8월 미갱신"}, {"name": "김○정", "kind": "재가입", "month": "2026-07", "plan": "1년", "note": "공백 약 5개월"}, {"name": "김○경", "kind": "재가입", "month": "2026-07", "plan": "1년", "note": "공백 약 3개월"}, {"name": "장○서", "kind": "재가입", "month": "2026-07", "plan": "1개월", "note": "공백 2년 이상"}, {"name": "김○안", "kind": "재가입", "month": "2026-07", "plan": "1개월", "note": "공백 약 2개월"}, {"name": "정○재", "kind": "재가입", "month": "2026-08", "plan": "1개월", "note": "공백 약 9개월"}, {"name": "조○미", "kind": "재가입", "month": "2026-08", "plan": "1개월", "note": "공백 약 2개월"}, {"name": "손○주", "kind": "재가입", "month": "2026-08", "plan": "1년", "note": "공백 약 3개월"}, {"name": "유○경", "kind": "재가입", "month": "2026-09", "plan": "1개월", "note": "공백 약 8개월"}, {"name": "유○름", "kind": "재가입", "month": "2026-09", "plan": "1개월", "note": "공백 약 8개월"}, {"name": "이○미", "kind": "재가입", "month": "2026-09", "plan": "1개월", "note": "공백 약 4개월"}, {"name": "김○태", "kind": "재가입", "month": "2026-09", "plan": "6개월", "note": "공백 약 4개월"}], "lapses": [{"name": "석○미", "month": "2026-07", "plan": "1개월", "note": "자동결제 해지", "key": "석○미-2026-07"}, {"name": "박○희", "month": "2026-07", "plan": "1개월", "note": "자동결제 해지", "key": "박○희-2026-07"}, {"name": "박○정", "month": "2026-07", "plan": "1개월", "note": "자동결제 해지", "key": "박○정-2026-07"}, {"name": "신○원", "month": "2026-07", "plan": "6개월", "note": "재결제 안 함", "key": "신○원-2026-07"}, {"name": "김○미", "month": "2026-07", "plan": "6개월", "note": "재결제 안 함", "key": "김○미-2026-07"}, {"name": "안○은", "month": "2026-07", "plan": "6개월", "note": "재결제 안 함", "key": "안○은-2026-07"}, {"name": "장○연", "month": "2026-07", "plan": "1년", "note": "재결제 안 함", "key": "장○연-2026-07"}, {"name": "안○정", "month": "2026-07", "plan": "1년", "note": "재결제 안 함", "key": "안○정-2026-07"}, {"name": "심○경", "month": "2026-08", "plan": "1개월", "note": "자동결제 해지 · 7월 재가입 후 1개월", "key": "심○경-2026-08"}, {"name": "신○은", "month": "2026-09", "plan": "1개월", "note": "자동결제 해지", "key": "신○은-2026-09"}, {"name": "송○결", "month": "2026-09", "plan": "1개월", "note": "자동결제 중단(해지 기록 없음)", "key": "송○결-2026-09"}], "watch": [{"name": "박○안", "plan": "1개월", "renew": "2026-05-15", "status": "종료", "last_program": "참여 기록 없음", "last_date": "", "group": "신규", "note": "4월 가입"}, {"name": "석○미", "plan": "1개월", "renew": "2026-07-30", "status": "종료", "last_program": "참여 기록 없음", "last_date": "", "group": "신규", "note": "4월 가입"}, {"name": "이○", "plan": "6개월", "renew": "2026-10-03", "status": "종료", "last_program": "동의보감", "last_date": "2026-05-17", "group": "신규", "note": "4월 가입"}, {"name": "송○결", "plan": "1개월", "renew": "2026-09-05", "status": "종료", "last_program": "스마트 레이키 S10", "last_date": "2026-06-08", "group": "신규", "note": "6월 가입"}, {"name": "박○정", "plan": "1개월", "renew": "2026-07-10", "status": "종료", "last_program": "심리발달 9단계 심화 S2", "last_date": "2026-06-10", "group": "신규", "note": "6월 가입"}, {"name": "김○아", "plan": "1개월", "renew": "2026-11-01", "status": "유지 중", "last_program": "9월 동의보감", "last_date": "2026-09-08", "group": "신규", "note": "8월 가입"}, {"name": "조○선", "plan": "1개월", "renew": "2026-10-24", "status": "유지 중", "last_program": "카루나®레이키 S6", "last_date": "2026-09-24", "group": "신규", "note": "9월 가입"}, {"name": "김○남", "plan": "1년", "renew": "2026-11-06", "status": "유지 중", "last_program": "심리상담+4바디", "last_date": "2025-11-06", "group": "미참여", "note": "4~9월 참여 없음"}, {"name": "김○환", "plan": "1개월", "renew": "2026-11-10", "status": "유지 중", "last_program": "장자", "last_date": "2023-12-15", "group": "미참여", "note": "4~9월 참여 없음"}, {"name": "한○연", "plan": "1개월", "renew": "2026-11-17", "status": "유지 중", "last_program": "심리상담+4바디", "last_date": "2025-11-21", "group": "미참여", "note": "4~9월 참여 없음"}, {"name": "김○원", "plan": "1년", "renew": "2026-10-17", "status": "종료", "last_program": "제3의 눈과 아카식 레코드", "last_date": "2025-08-30", "group": "미참여", "note": "재결제 대기"}], "retention": [{"segment": "프로그램 6회 이상 참여", "group": "참여 횟수", "members": 87, "retained": 56, "avg_months": 29}, {"segment": "프로그램 0~5회 참여", "group": "참여 횟수", "members": 93, "retained": 7, "avg_months": 7}, {"segment": "첫 결제 1년", "group": "첫 결제 멤버십", "members": 36, "retained": 25, "avg_months": 36}, {"segment": "첫 결제 6개월", "group": "첫 결제 멤버십", "members": 30, "retained": 11, "avg_months": 18}, {"segment": "첫 결제 1개월", "group": "첫 결제 멤버십", "members": 114, "retained": 27, "avg_months": 12}], "routes": [{"route": "지인소개", "signups": 80, "paid": 56, "current": 21}, {"route": "카카오톡", "signups": 85, "paid": 53, "current": 17}, {"route": "유튜브", "signups": 68, "paid": 34, "current": 13}, {"route": "검색", "signups": 11, "paid": 6, "current": 2}, {"route": "블로그", "signups": 16, "paid": 7, "current": 1}, {"route": "기타 SNS", "signups": 26, "paid": 10, "current": 1}], "cohorts": [{"year": "2023", "label": "2023 (6~12월)", "new_paid": 105}, {"year": "2024", "label": "2024", "new_paid": 39}, {"year": "2025", "label": "2025", "new_paid": 24}, {"year": "2026", "label": "2026 (1~10월)", "new_paid": 12}]};
+(function(){
+  const calcs = {}, handlers = [];
+  let params = { q: '2026-Q3' };
+  const res = (id) => {
+    if (window.__PM_DATA[id]) return { status:'ok', data: window.__PM_DATA[id] };
+    const c = calcs[id];
+    if (c) { if (!c.cache) c.cache = c.fn(...c.inputs.map((i) => res(i).data)); return { status:'ok', data: c.cache }; }
+    return { status:'missing', data: [] };
+  };
+  const run = () => handlers.forEach((f) => { try { f(); } catch (e) { console.error(e); } });
+  let t; window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(run, 120); });
+  window.dash = {
+    data: res,
+    calc: (id, o) => { calcs[id] = { fn: o.fn, inputs: o.inputs }; },
+    loader: () => {},
+    onData: (fn) => { handlers.push(fn); fn(); },
+    params: () => ({ ...params }),
+    setParams: (p) => { params = { ...params, ...p }; run(); },
+    resetParams: () => { params = { q: '2026-Q3' }; run(); },
+    setLink: (n) => { try { history.replaceState(null, '', '#' + n); } catch (e) {} },
+    refresh: () => {},
+    colors: [],
+  };
+})();
+</script>
+<style>
+.pm { --pm-1y:#6d45b8; --pm-6m:#a37ad9; --pm-1m:#d6bbf7; --pm-accent:#7b4fc4; --pm-accent-soft:rgba(123,79,196,.12); --pm-tab-on:#2b2b2b; --pm-tab-on-fg:#dbb6ff;
+  max-width: 1120px; margin-inline: auto; font-family: var(--font-anthropic-sans); color: var(--color-fg); display: grid; gap: var(--cds-gap-lg); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .pm { --pm-1y:#c7a4ff; --pm-6m:#9673d6; --pm-1m:#5c4290; --pm-accent:#c7a4ff; --pm-accent-soft:rgba(199,164,255,.16); --pm-tab-on:#dbb6ff; --pm-tab-on-fg:#2b2b2b; } }
+:root[data-theme="dark"] .pm { --pm-1y:#c7a4ff; --pm-6m:#9673d6; --pm-1m:#5c4290; --pm-accent:#c7a4ff; --pm-accent-soft:rgba(199,164,255,.16); --pm-tab-on:#dbb6ff; --pm-tab-on-fg:#2b2b2b; }
+.pm-head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--cds-gap-md); justify-content: space-between;
+  background: #2b2b2b; color: #fff; border-radius: calc(var(--cds-radius) * 2); padding: var(--cds-pad-lg); }
+.pm-brand { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: 12px; align-items: center; min-width: 0; }
+.pm-brand img { grid-column: 1; grid-row: 1; width: 40px; height: 40px; align-self: center; }
+.pm-brand-text { display: contents; }
+.pm-brand .pm-title { grid-column: 2; grid-row: 1; }
+.pm-brand .pm-sub, .pm-brand .pm-src { grid-column: 2; justify-self: start; }
+.pm-title { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; line-height: 1.2; text-wrap: balance; }
+.pm-sub { margin: 4px 0 0; color: #d6bbf7; font-size: var(--cds-font-size-caption); }
+.pm-head .pm-title { color: #fff; }
+.pm-src { margin: 6px 0 0; display: inline-block; font-size: 0.75rem; color: #e8e6ee; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18); border-radius: 999px; padding: 2px 10px; }
+.pm-seg { display: inline-flex; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; padding: 4px; gap: 4px; background: rgba(255,255,255,.06); }
+.pm-seg button { font: inherit; font-size: var(--cds-font-size-body); font-weight: 500; border: 0; background: transparent; color: #cfcfd4; padding: 8px 16px; border-radius: 999px; cursor: pointer; white-space: nowrap; transition: background .15s, color .15s; }
+.pm-seg button:hover { color: #fff; background: rgba(255,255,255,.1); }
+.pm-seg button[aria-pressed="true"] { background: #dbb6ff; color: #2b2b2b; font-weight: 700; }
+.pm-seg-wrap { display: grid; gap: 6px; justify-items: start; }
+.pm-seg-lab { font-size: 0.72rem; letter-spacing: .06em; color: #a9a9b2; }
+.pm-seg button:focus-visible { outline: 2px solid #dbb6ff; outline-offset: 2px; }
+.pm-tabs button:focus-visible, .pm-chip:focus-visible { outline: 2px solid var(--pm-accent); outline-offset: 2px; }
+.pm-take { margin: 0; font-size: var(--cds-font-size-heading); line-height: 1.5; max-width: 62ch; }
+.pm-take b { font-weight: 600; }
+.pm-tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; padding: 6px; background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: calc(var(--cds-radius) * 2); position: sticky; top: 0; z-index: 3; box-shadow: 0 6px 16px -12px rgba(0,0,0,.35); }
+.pm-tabs button { font: inherit; font-size: var(--cds-font-size-body); font-weight: 500; border: 1px solid transparent; background: transparent; color: var(--color-fg-muted); padding: 12px 6px; border-radius: var(--cds-radius); cursor: pointer; display: grid; justify-items: center; gap: 4px; line-height: 1.2; transition: background .15s, color .15s; }
+.pm-tabs button:hover { background: var(--pm-accent-soft); color: var(--color-fg); }
+.pm-tabs button .ic { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.pm-tabs button[aria-selected="true"] { background: var(--pm-tab-on); color: var(--pm-tab-on-fg); font-weight: 700; box-shadow: 0 2px 6px -2px rgba(0,0,0,.25); }
+@media (max-width: 420px) { .pm-tabs button { font-size: 0.8rem; padding: 10px 2px; } }
+.pm-page { display: grid; gap: var(--cds-gap-lg); }
+.pm [hidden] { display: none !important; }
+.pm-title, .pm-take, .pm-note, .pm-card h2 { word-break: keep-all; }
+@media (max-width: 560px) { .pm-kpis { grid-template-columns: 1fr 1fr; } .pm-kpis .pm-kpi:first-child { grid-column: 1 / -1; } }
+.pm-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr)); gap: var(--cds-gap-md); }
+.pm-kpi { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-md); display: grid; gap: 4px; align-content: start; }
+.pm-kpi .lab { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.pm-kpi .val { font-family: var(--font-anthropic-serif); font-size: 2rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.pm-kpi .cmp { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); font-variant-numeric: tabular-nums; }
+.pm-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: var(--cds-gap-md); }
+.pm-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-sm); min-width: 0; align-content: start; }
+.pm-card h2 { margin: 0; font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); }
+.pm-note { margin: 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); line-height: 1.5; }
+.pm-chart { position: relative; min-height: 260px; }
+.pm-chart.sm { min-height: 200px; }
+.pm-legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.pm-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 5px; vertical-align: -1px; }
+.pm-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); white-space: nowrap; z-index: 2; }
+.pm-tip .t { color: var(--cds-text-secondary); margin-bottom: 2px; }
+.pm-eq { font-size: var(--cds-font-size-body); background: var(--pm-accent-soft); border-radius: var(--cds-radius); padding: var(--cds-pad-sm) var(--cds-pad-md); font-variant-numeric: tabular-nums; line-height: 1.6; }
+.pm-tbl-wrap { overflow-x: auto; }
+.pm-tbl { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-caption); font-variant-numeric: tabular-nums; }
+.pm-tbl th, .pm-tbl td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--color-border-line); vertical-align: top; }
+.pm-tbl th { color: var(--color-fg-muted); font-weight: 500; white-space: nowrap; }
+.pm-tbl td.n, .pm-tbl th.n { text-align: right; }
+.pm-tbl td { white-space: nowrap; }
+.pm-tbl td:last-child { white-space: normal; min-width: 8rem; }
+.pm-pill { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 0.75rem; white-space: nowrap; border: 1px solid var(--color-border-line); }
+.pm-pill.new { background: var(--pm-accent-soft); border-color: transparent; color: var(--color-fg); }
+.pm-pill.ok { color: var(--color-ok); }
+.pm-pill.end { color: var(--color-fg-muted); }
+.pm-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.pm-chip { font: inherit; font-size: var(--cds-font-size-body); border: 1px solid var(--color-border-line); background: var(--color-bg); color: var(--color-fg); border-radius: 999px; padding: 7px 14px; cursor: pointer; }
+.pm-chip:hover { border-color: var(--pm-accent); }
+.pm-chip[aria-pressed="true"] { background: var(--pm-tab-on); border-color: var(--pm-tab-on); color: var(--pm-tab-on-fg); font-weight: 700; }
+.pm-empty { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); padding: var(--cds-pad-md) 0; }
+.pm-def { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.pm-def summary { cursor: pointer; color: var(--color-fg); }
+.pm-head-right { display: grid; gap: 10px; justify-items: start; }
+.pm-pdf { display: inline-flex; align-items: center; gap: 6px; font-size: var(--cds-font-size-caption); font-weight: 600; color: #2b2b2b; background: #ffffff; border-radius: 999px; padding: 7px 14px; text-decoration: none; }
+.pm-pdf:hover { background: #dbb6ff; }
+.pm-pdf svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.pm-print-h { display: none; font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; padding-bottom: 6px; border-bottom: 2px solid var(--pm-accent); }
+.pm-printing .pm-print-h { display: block; }
+.pm-printing .pm-tabs, .pm-printing .pm-seg-wrap, .pm-printing .pm-chips, .pm-printing .pm-pdf, .pm-printing #watch-count { display: none !important; }
+.pm-printing .pm-tabs { position: static; }
+.pm-printing .pm-card, .pm-printing .pm-kpi { break-inside: avoid; page-break-inside: avoid; }
+.pm-printing [data-page="flow"], .pm-printing [data-page="watch"], .pm-printing [data-page="analysis"] { break-before: page; page-break-before: always; }
+@media print { .pm-tabs, .pm-seg-wrap, .pm-chips, .pm-pdf { display: none !important; } .pm-head, .pm-seg button[aria-pressed="true"], .pm-tabs button { -webkit-print-color-adjust: exact; print-color-adjust: exact; } .pm-card, .pm-kpi, .pm-eq { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+
+.pm-def ul { margin: 8px 0 0; padding-left: 18px; line-height: 1.7; }
+[data-dash-source-state=empty] { color: transparent; }
+[data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+@media (max-width: 560px) {
+  .pm-watch thead { display: none; }
+  .pm-watch tr { display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; padding: 10px 0; border-bottom: 1px solid var(--color-border-line); }
+  .pm-watch td { border: 0; padding: 0; }
+  .pm-watch td.name { font-size: var(--cds-font-size-body); font-weight: 600; }
+  .pm-watch td.grp { grid-column: 2; grid-row: 1; text-align: right; }
+  .pm-watch td.plan::before { content: "멤버십 "; color: var(--color-fg-muted); }
+  .pm-watch td.renew::before { content: "갱신·종료 "; color: var(--color-fg-muted); }
+  .pm-watch td.last::before { content: "최근 참여 "; color: var(--color-fg-muted); }
+  .pm-watch td.plan, .pm-watch td.renew, .pm-watch td.last, .pm-watch td.st, .pm-watch td.note { grid-column: 1 / -1; }
+}
+</style>
+
+<div class="pm-shell"><div class="pm">
+  <header class="pm-head" id="top">
+    <div class="pm-brand">
+      <img alt="에세네 프라임" src="data:image/png;base64,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">
+      <div class="pm-brand-text">
+        <h1 class="pm-title">에세네 프라임 멤버십 현황</h1>
+        <p class="pm-sub" id="pm-sub">결제 기록 기준 · 무료·예외 회원 제외</p>
+        <p class="pm-src">출처: 프라임 웹사이트 및 관리자 자료</p>
+      </div>
+    </div>
+    <div class="pm-head-right">
+    <div class="pm-seg-wrap">
+      <span class="pm-seg-lab">분기 선택</span>
+      <div class="pm-seg" role="group" aria-label="분기 선택">
+        <button type="button" data-q="2026-Q3">2026년 3분기</button>
+        <button type="button" data-q="2025-Q3">2025년 3분기</button>
+      </div>
+    </div>
+      <a class="pm-pdf" href="prime-membership-2026-Q3.pdf" download="에세네프라임_멤버십현황_2026-3분기.pdf"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg>PDF 다운로드</a>
+    </div>
+  </header>
+
+  <p class="pm-take" id="pm-take">
+    <span class="tq">—</span> 말 유효 회원은 <b data-source="kpi" data-field="end" class="dash-skeleton k-end">—</b>명입니다.
+    분기 중 <b data-source="kpi" data-field="net" class="dash-skeleton k-net">—</b>명 변했고,
+    신규 <b data-source="kpi" data-field="new" class="dash-skeleton k-new">—</b>명 · 재가입 <b data-source="kpi" data-field="rejoin" class="dash-skeleton k-rejoin">—</b>명이 들어오고 미갱신 <b data-source="kpi" data-field="lapse" class="dash-skeleton k-lapse">—</b>명이 빠졌습니다.
+  </p>
+
+  <nav class="pm-tabs" role="tablist" aria-label="화면">
+    <button type="button" role="tab" data-tab="overview" id="tab-overview"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>개요</span></button>
+    <button type="button" role="tab" data-tab="flow" id="tab-flow"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h11l-3-3M20 17H9l3 3"/></svg><span>분기 흐름</span></button>
+    <button type="button" role="tab" data-tab="watch" id="tab-watch"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20c-.4-2.2-1.6-3.8-3.3-4.7"/></svg><span>관리 회원</span></button>
+    <button type="button" role="tab" data-tab="analysis" id="tab-analysis"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span>참고 분석</span></button>
+  </nav>
+
+  <!-- 개요 -->
+  <section class="pm-page" id="overview" data-page="overview">
+    <h2 class="pm-print-h">개요</h2>
+    <div class="pm-kpis">
+      <div class="pm-kpi" id="kpi-end"><span class="lab">분기 말 유효 회원</span><span class="val dash-skeleton" data-source="kpi" data-field="end">—</span><span class="cmp" data-source="kpi" data-field="end">—</span></div>
+      <div class="pm-kpi" id="kpi-net"><span class="lab">분기 순증</span><span class="val dash-skeleton" data-source="kpi" data-field="net">—</span><span class="cmp" data-source="kpi" data-field="net">—</span></div>
+      <div class="pm-kpi" id="kpi-new"><span class="lab">신규</span><span class="val dash-skeleton" data-source="kpi" data-field="new">—</span><span class="cmp" data-source="kpi" data-field="new">—</span></div>
+      <div class="pm-kpi" id="kpi-rejoin"><span class="lab">재가입</span><span class="val dash-skeleton" data-source="kpi" data-field="rejoin">—</span><span class="cmp" data-source="kpi" data-field="rejoin">—</span></div>
+      <div class="pm-kpi" id="kpi-lapse"><span class="lab">미갱신</span><span class="val dash-skeleton" data-source="kpi" data-field="lapse">—</span><span class="cmp" data-source="kpi" data-field="lapse">—</span></div>
+    </div>
+    <div class="pm-card" id="card-trend">
+      <h2>월말 유효 회원 추이</h2>
+      <p class="pm-note">2025년 1월~2026년 9월, 멤버십별 누적. 선택한 분기는 진하게 표시됩니다.</p>
+      <div class="pm-legend"><span><i style="background:var(--pm-1y)"></i>1년</span><span><i style="background:var(--pm-6m)"></i>6개월</span><span><i style="background:var(--pm-1m)"></i>1개월</span></div>
+      <div class="pm-chart" id="chart-trend" data-source="monthly"></div>
+    </div>
+    <div class="pm-grid">
+      <div class="pm-card" id="card-plan">
+        <h2>분기 말 멤버십 구성</h2>
+        <p class="pm-note">선택한 분기의 마지막 달 기준, 전년 같은 분기와 비교.</p>
+        <div class="pm-tbl-wrap"><table class="pm-tbl" id="tbl-plan" data-source="plan_cmp" data-row-key="plan">
+          <thead><tr><th data-field="plan">멤버십</th><th class="n" data-field="this">선택 분기</th><th class="n" data-field="other">비교 분기</th></tr></thead><tbody></tbody></table></div>
+      </div>
+      <div class="pm-card" id="card-hs">
+        <h2>힐링스쿨 미경험 유효 회원</h2>
+        <p class="pm-note">회원정보의 힐링스쿨 항목이 "없음"인 유효 회원. 가장 이탈하기 쉬운 집단입니다.</p>
+        <div class="pm-chart sm" id="chart-hs" data-source="monthly"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 분기 흐름 -->
+  <section class="pm-page" id="flow" data-page="flow" hidden>
+    <h2 class="pm-print-h">분기 흐름</h2>
+    <div class="pm-card" id="card-wf">
+      <h2>분기 초에서 분기 말까지</h2>
+      <div class="pm-eq" id="pm-eq">
+        <span data-source="kpi" data-field="start" class="e-start">—</span>명
+        + 신규 <span data-source="kpi" data-field="new" class="e-new">—</span>
+        + 재가입 <span data-source="kpi" data-field="rejoin" class="e-rejoin">—</span>
+        − 미갱신 <span data-source="kpi" data-field="lapse" class="e-lapse">—</span>
+        ± 지연 갱신 <span data-source="kpi" data-field="late" class="e-late">—</span>
+        = <b data-source="kpi" data-field="end" class="e-end">—</b>명
+      </div>
+      <div class="pm-chart" id="chart-wf" data-source="kpi"></div>
+      <p class="pm-note">초록은 늘어난 인원, 빨강은 빠진 인원입니다. 회색 막대는 분기 초와 분기 말 회원 수입니다.</p>
+    </div>
+    <div class="pm-card" id="card-month">
+      <h2>월별 흐름</h2>
+      <div class="pm-tbl-wrap"><table class="pm-tbl" id="tbl-flow" data-source="flow" data-row-key="month">
+        <thead><tr><th data-field="month">월</th><th class="n" data-field="start">월초</th><th class="n" data-field="new">신규</th><th class="n" data-field="rejoin">재가입</th><th class="n" data-field="lapse_1m">미갱신(1개월)</th><th class="n" data-field="lapse_long">미갱신(6개월·1년)</th><th class="n" data-field="late_out">지연 갱신 이탈</th><th class="n" data-field="late_in">지연 갱신 복귀</th><th class="n" data-field="end">월말</th></tr></thead><tbody></tbody></table></div>
+      <details class="pm-def"><summary>용어 설명</summary><ul>
+        <li>신규: 처음으로 멤버십을 결제한 회원</li>
+        <li>재가입: 만료 후 45일 넘게 공백이 있다가 다시 결제한 회원</li>
+        <li>지연 갱신: 만료 후 45일 안에 다시 결제한 회원(이탈로 세지 않음)</li>
+        <li>미갱신(1개월): 자동결제 해지로 다음 결제가 되지 않은 회원</li>
+        <li>미갱신(6개월·1년): 수동결제 멤버십이 만료된 뒤 재결제하지 않은 회원</li>
+      </ul></details>
+    </div>
+    <div class="pm-grid">
+      <div class="pm-card" id="card-joins">
+        <h2>신규·재가입 명단</h2>
+        <p class="pm-note">신규는 첫 멤버십 결제, 재가입은 45일 넘는 공백 후 다시 결제한 회원입니다.</p>
+        <div class="pm-tbl-wrap"><table class="pm-tbl" id="tbl-joins" data-source="joins" data-row-key="name">
+          <thead><tr><th data-field="name">이름</th><th data-field="kind">구분</th><th data-field="month">월</th><th data-field="plan">멤버십</th><th data-field="note">비고</th></tr></thead><tbody></tbody></table></div>
+        <p class="pm-empty" id="joins-empty" hidden>명단은 2026년 3분기부터 기록합니다.</p>
+      </div>
+      <div class="pm-card" id="card-lapses">
+        <h2>미갱신 명단</h2>
+        <p class="pm-note">1개월은 자동결제 해지, 6개월·1년은 수동결제라 재결제하지 않은 경우입니다.</p>
+        <div class="pm-tbl-wrap"><table class="pm-tbl" id="tbl-lapses" data-source="lapses" data-row-key="key">
+          <thead><tr><th data-field="name">이름</th><th data-field="month">월</th><th data-field="plan">멤버십</th><th data-field="note">비고</th></tr></thead><tbody></tbody></table></div>
+        <p class="pm-empty" id="lapses-empty" hidden>명단은 2026년 3분기부터 기록합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 관리 회원 -->
+  <section class="pm-page" id="watch" data-page="watch" hidden>
+    <h2 class="pm-print-h">관리 회원</h2>
+    <div class="pm-card" id="card-watch">
+      <h2>관리 회원</h2>
+      <p class="pm-note">2·3분기(4~9월) 신규 회원과, 같은 기간 멤버십을 계속 유지했지만 프로그램에 참여하지 않은 회원입니다. 기준일 2026-10-19.</p>
+      <div class="pm-chips" role="group" aria-label="구분">
+        <button type="button" class="pm-chip" data-g="all">전체</button>
+        <button type="button" class="pm-chip" data-g="신규">신규</button>
+        <button type="button" class="pm-chip" data-g="미참여">미참여</button>
+        <span style="width:8px"></span>
+        <button type="button" class="pm-chip" data-s="all">상태 전체</button>
+        <button type="button" class="pm-chip" data-s="유지 중">유지 중</button>
+        <button type="button" class="pm-chip" data-s="종료">종료</button>
+      </div>
+      <div class="pm-tbl-wrap"><table class="pm-tbl pm-watch" id="tbl-watch" data-source="watch" data-row-key="name">
+        <thead><tr><th data-field="name">이름</th><th data-field="group">구분</th><th data-field="plan">멤버십</th><th data-field="renew">갱신·종료일</th><th data-field="status">상태</th><th data-field="last_program">최근 참여</th><th data-field="note">비고</th></tr></thead><tbody></tbody></table></div>
+      <p class="pm-note" id="watch-count"></p>
+    </div>
+  </section>
+
+  <!-- 참고 분석 -->
+  <section class="pm-page" id="analysis" data-page="analysis" hidden>
+    <h2 class="pm-print-h">참고 분석</h2>
+    <p class="pm-note">멤버십을 한 번이라도 결제한 회원 전체(2023년 6월~2026년 10월 17일)를 분석했습니다. 분기 선택과 관계없이 같은 내용입니다.</p>
+    <div class="pm-grid">
+      <div class="pm-card" id="card-ret">
+        <h2>무엇이 회원을 남게 하나</h2>
+        <p class="pm-note">현재 유지 비율. 프로그램 참여 횟수와 첫 결제 멤버십별로 나눴습니다.</p>
+        <div class="pm-chart" id="chart-ret" data-source="ret_rate"></div>
+        <p class="pm-note">참여가 많아서 남는지, 남아 있어서 많이 참여하는지는 이 자료만으로 구분할 수 없습니다.</p>
+      </div>
+      <div class="pm-card" id="card-route">
+        <h2>가입 경로별 유료 전환율</h2>
+        <p class="pm-note">사이트 가입자 중 멤버십을 한 번이라도 결제한 비율.</p>
+        <div class="pm-chart" id="chart-route" data-source="route_rate"></div>
+      </div>
+    </div>
+    <div class="pm-card" id="card-cohort">
+      <h2>연도별 새 유료 회원</h2>
+      <p class="pm-note">처음으로 멤버십을 결제한 회원 수. 2023년은 6월부터, 2026년은 10월까지입니다.</p>
+      <div class="pm-chart sm" id="chart-cohort" data-source="cohorts"></div>
+    </div>
+  </section>
+
+  <p class="pm-note" id="pm-foot">회원 수는 결제일부터 멤버십 기간 동안 유효한 것으로 셉니다. 운영진·힐러 계정 포함, 수동 부여한 무료·예외 회원 제외.</p>
+</div>
+
+</div>
+<script>
+dash.calc('kpi', {
+  title: '분기 요약',
+  description: '월별 흐름을 분기마다 더한 값. 미갱신은 1개월과 6개월·1년의 합, 지연 갱신은 복귀에서 이탈을 뺀 값.',
+  inputs: ['flow'],
+  fn: (flow) => {
+    const qs = [...new Set(flow.map((r) => r.quarter))].sort();
+    return qs.map((q) => {
+      const rs = flow.filter((r) => r.quarter === q).sort((a, b) => a.month.localeCompare(b.month));
+      const sum = (k) => rs.reduce((s, r) => s + Number(r[k]), 0);
+      const start = Number(rs[0].start), end = Number(rs[rs.length - 1].end);
+      return { quarter: q, start, end, net: end - start, new: sum('new'), rejoin: sum('rejoin'),
+        lapse_1m: sum('lapse_1m'), lapse_long: sum('lapse_long'), lapse: sum('lapse_1m') + sum('lapse_long'),
+        late: sum('late_in') - sum('late_out') };
+    });
+  },
+});
+dash.calc('plan_cmp', {
+  title: '분기 말 멤버십 구성',
+  description: '2026년 9월 말과 2025년 9월 말의 멤버십별 유효 회원.',
+  inputs: ['monthly'],
+  fn: (monthly) => {
+    const a = monthly.find((r) => r.month === '2026-09'), b = monthly.find((r) => r.month === '2025-09');
+    return [['1년', 'm12'], ['6개월', 'm6'], ['1개월', 'm1'], ['합계', 'total']].map(([plan, k]) => ({ plan, y2026: Number(a[k]), y2025: Number(b[k]) }));
+  },
+});
+dash.calc('ret_rate', {
+  title: '현재 유지 비율',
+  description: '구분별 현재 유지 인원 ÷ 해당 인원.',
+  inputs: ['retention'],
+  fn: (retention) => retention.map((r) => ({ segment: r.segment, group: r.group, rate: Number(r.retained) / Number(r.members), members: Number(r.members), retained: Number(r.retained), avg_months: Number(r.avg_months) })),
+});
+dash.calc('route_rate', {
+  title: '유료 전환율',
+  description: '경로별 멤버십 결제 경험 인원 ÷ 사이트 가입 인원.',
+  inputs: ['routes'],
+  fn: (routes) => routes.map((r) => ({ route: r.route, rate: Number(r.paid) / Number(r.signups), signups: Number(r.signups), paid: Number(r.paid), current: Number(r.current) })),
+});
+
+const root = document.querySelector('.pm');
+const fmt = d3.format(',');
+const signed = (n) => (n > 0 ? '+' : n < 0 ? '−' : '') + Math.abs(n);
+const qName = (q) => q.slice(0, 4) + '년 ' + q.slice(-1) + '분기';
+const other = (q) => (q === '2026-Q3' ? '2025-Q3' : '2026-Q3');
+const ymLabel = (m) => Number(m.slice(5)) + '월';
+
+/* 분기 선택 */
+root.querySelectorAll('.pm-seg button').forEach((b) => b.addEventListener('click', () => dash.setParams({ q: b.dataset.q })));
+
+/* 탭 */
+let tab = 'overview';
+let printAll = false;
+const showTab = (t, link = true) => {
+  tab = t;
+  root.querySelectorAll('.pm-tabs button').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.tab === t)));
+  root.querySelectorAll('[data-page]').forEach((p) => { p.hidden = !printAll && p.dataset.page !== t; });
+  if (link) dash.setLink(t);
+  draw();
+};
+root.querySelectorAll('.pm-tabs button').forEach((b) => b.addEventListener('click', () => showTab(b.dataset.tab)));
+
+/* 관리 회원 필터 */
+let gSel = 'all', sSel = 'all';
+root.querySelectorAll('.pm-chip').forEach((c) => c.addEventListener('click', () => {
+  if (c.dataset.g) gSel = c.dataset.g; else sSel = c.dataset.s;
+  draw();
+}));
+
+function tipFor(box) {
+  let t = box.querySelector('.pm-tip');
+  if (!t) { t = document.createElement('div'); t.className = 'pm-tip'; t.hidden = true; box.appendChild(t); }
+  return t;
+}
+function placeTip(box, tip, ev, title, lines) {
+  tip.replaceChildren();
+  const h = document.createElement('div'); h.className = 't'; h.textContent = title; tip.appendChild(h);
+  lines.forEach(([color, text]) => {
+    const d = document.createElement('div');
+    if (color) { const i = document.createElement('i'); i.style.cssText = `display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px;background:${color}`; d.appendChild(i); }
+    d.appendChild(document.createTextNode(text)); tip.appendChild(d);
+  });
+  tip.hidden = false;
+  const r = box.getBoundingClientRect();
+  let x = ev.clientX - r.left + 12, y = ev.clientY - r.top + 12;
+  const w = tip.offsetWidth, hgt = tip.offsetHeight;
+  if (x + w > r.width) x = Math.max(0, ev.clientX - r.left - w - 12);
+  if (y + hgt > r.height) y = Math.max(0, r.height - hgt);
+  tip.style.left = x + 'px'; tip.style.top = y + 'px';
+}
+function failLine(box) {
+  box.replaceChildren();
+  const d = document.createElement('div');
+  d.style.cssText = 'display:flex;align-items:center;justify-content:center;gap:6px;min-height:inherit;height:100%;color:var(--color-fg-muted);font-size:var(--cds-font-size-caption)';
+  const dot = document.createElement('span'); dot.style.cssText = 'width:.375rem;height:.375rem;border-radius:50%;background:var(--color-bad)';
+  d.append(dot, document.createTextNode('Failed to load')); box.appendChild(d);
+}
+function measure(svg, text, size) {
+  const t = svg.append('text').attr('font-size', size).text(text);
+  const w = t.node().getComputedTextLength(); t.remove(); return w;
+}
+
+/* 추이 차트 */
+function drawTrend(q) {
+  const box = document.getElementById('chart-trend');
+  const d = dash.data('monthly');
+  if (d.status === 'error') return failLine(box);
+  if (d.status !== 'ok') { box.replaceChildren(); return; }
+  const rows = d.data.map((r) => ({ ...r, m1: +r.m1, m6: +r.m6, m12: +r.m12, total: +r.total }));
+  const qMonths = q === '2026-Q3' ? ['2026-07', '2026-08', '2026-09'] : ['2025-07', '2025-08', '2025-09'];
+  const W = box.clientWidth || 600, H = 260, m = { t: 22, r: 4, b: 38, l: 28 };
+  box.querySelectorAll('svg').forEach((s) => s.remove());
+  const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', '월말 유효 회원 추이');
+  const x = d3.scaleBand(rows.map((r) => r.month), [m.l, W - m.r]).padding(0.28);
+  const y = d3.scaleLinear([0, 100], [H - m.b, m.t]);
+  svg.append('g').selectAll('line').data([0, 25, 50, 75, 100]).join('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y).attr('y2', y).attr('stroke', 'var(--cds-chart-grid)');
+  svg.append('g').selectAll('text').data([0, 50, 100]).join('text').attr('x', m.l - 6).attr('y', (v) => y(v) + 4).attr('text-anchor', 'end').attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text((v) => v);
+  const keys = [['m12', 'var(--pm-1y)', '1년'], ['m6', 'var(--pm-6m)', '6개월'], ['m1', 'var(--pm-1m)', '1개월']];
+  const tip = tipFor(box);
+  const g = svg.append('g').selectAll('g').data(rows).join('g').attr('opacity', (r) => (qMonths.includes(r.month) ? 1 : 0.45));
+  g.each(function (r) {
+    let acc = 0;
+    keys.forEach(([k, c]) => {
+      d3.select(this).append('rect').attr('x', x(r.month)).attr('width', x.bandwidth()).attr('y', y(acc + r[k])).attr('height', y(acc) - y(acc + r[k])).attr('fill', c);
+      acc += r[k];
+    });
+  });
+  const wide = x.bandwidth() > 22;
+  const showVal = (r) => (wide ? true : r.month === qMonths[2]);
+  g.append('text').attr('x', (r) => x(r.month) + x.bandwidth() / 2).attr('y', (r) => y(r.total) - 5).attr('text-anchor', 'middle').attr('font-size', (r) => (qMonths.includes(r.month) ? 12 : 10)).attr('font-weight', (r) => (qMonths.includes(r.month) ? 600 : 400)).attr('fill', (r) => (qMonths.includes(r.month) ? 'var(--color-fg)' : 'var(--color-fg-muted)')).text((r) => (showVal(r) ? r.total : ''));
+  g.append('rect').attr('x', (r) => x(r.month) - x.step() * x.paddingInner() / 2).attr('width', x.step()).attr('y', m.t).attr('height', H - m.t - m.b).attr('fill', 'transparent')
+    .on('mousemove', (ev, r) => placeTip(box, tip, ev, `${r.month.slice(0, 4)}년 ${ymLabel(r.month)} · ${r.total}명`, keys.map(([k, c, n]) => [c, `${n} ${r[k]}명`])))
+    .on('mouseleave', () => { tip.hidden = true; });
+  const step = W < 520 ? 3 : 1;
+  svg.append('g').selectAll('text').data(rows.filter((r, i) => (step === 1 ? true : i % step === 0))).join('text').attr('x', (r) => x(r.month) + x.bandwidth() / 2).attr('y', H - m.b + 15).attr('text-anchor', 'middle').attr('font-size', 10).attr('fill', 'var(--color-fg-muted)').text((r) => ymLabel(r.month));
+  const yr = rows.findIndex((r) => r.month === '2026-01');
+  const xs = x(rows[yr].month) - x.step() * x.paddingInner() / 2;
+  svg.append('line').attr('x1', xs).attr('x2', xs).attr('y1', m.t).attr('y2', H - m.b + 22).attr('stroke', 'var(--cds-chart-reference)').attr('stroke-dasharray', '3 3');
+  svg.append('text').attr('x', m.l).attr('y', H - 4).attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text('2025');
+  svg.append('text').attr('x', xs + 4).attr('y', H - 4).attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text('2026');
+  box.appendChild(tip);
+}
+
+/* 힐링스쿨 미경험 라인 */
+function drawHs(q) {
+  const box = document.getElementById('chart-hs');
+  const d = dash.data('monthly');
+  if (d.status === 'error') return failLine(box);
+  if (d.status !== 'ok') { box.replaceChildren(); return; }
+  const rows = d.data.map((r) => ({ month: r.month, v: +r.no_hs, date: new Date(r.month + '-01T00:00:00Z') }));
+  const W = box.clientWidth || 400, H = 200, m = { t: 18, r: 30, b: 26, l: 26 };
+  box.querySelectorAll('svg').forEach((s) => s.remove());
+  const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', '힐링스쿨 미경험 유효 회원 추이');
+  const x = d3.scaleUtc(d3.extent(rows, (r) => r.date), [m.l, W - m.r]);
+  const y = d3.scaleLinear([0, 25], [H - m.b, m.t]);
+  svg.append('g').selectAll('line').data([0, 10, 20]).join('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y).attr('y2', y).attr('stroke', 'var(--cds-chart-grid)');
+  svg.append('g').selectAll('text').data([0, 10, 20]).join('text').attr('x', m.l - 6).attr('y', (v) => y(v) + 4).attr('text-anchor', 'end').attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text((v) => v);
+  svg.append('path').datum(rows).attr('fill', 'none').attr('stroke', 'var(--pm-accent)').attr('stroke-width', 2).attr('stroke-linejoin', 'round').attr('stroke-linecap', 'round').attr('d', d3.line((r) => x(r.date), (r) => y(r.v)));
+  const qEnd = q === '2026-Q3' ? '2026-09' : '2025-09';
+  const p = rows.find((r) => r.month === qEnd);
+  svg.append('circle').attr('cx', x(p.date)).attr('cy', y(p.v)).attr('r', 4).attr('fill', 'var(--pm-accent)');
+  svg.append('text').attr('x', x(p.date)).attr('y', y(p.v) - 9).attr('text-anchor', 'middle').attr('font-size', 12).attr('font-weight', 600).attr('fill', 'var(--color-fg)').text(p.v + '명');
+  svg.append('text').attr('x', m.l).attr('y', H - 6).attr('font-size', 10).attr('fill', 'var(--color-fg-muted)').text('2025년 1월');
+  svg.append('text').attr('x', W - m.r).attr('y', H - 6).attr('text-anchor', 'end').attr('font-size', 10).attr('fill', 'var(--color-fg-muted)').text('2026년 9월');
+  const tip = tipFor(box);
+  const bis = d3.bisector((r) => r.date).center;
+  svg.append('rect').attr('x', m.l).attr('y', m.t).attr('width', W - m.l - m.r).attr('height', H - m.t - m.b).attr('fill', 'transparent')
+    .on('mousemove', (ev) => { const [mx] = d3.pointer(ev); const r = rows[bis(rows, x.invert(mx))]; placeTip(box, tip, ev, `${r.month.slice(0, 4)}년 ${ymLabel(r.month)}`, [[null, `${r.v}명`]]); })
+    .on('mouseleave', () => { tip.hidden = true; });
+  box.appendChild(tip);
+}
+
+/* 워터폴 */
+function drawWf(k) {
+  const box = document.getElementById('chart-wf');
+  if (!k) { box.replaceChildren(); return; }
+  const steps = [
+    { n: '분기초', v: k.start, type: 'total' }, { n: '신규', v: k.new, type: 'up' }, { n: '재가입', v: k.rejoin, type: 'up' },
+    { n: '미갱신 1개월', v: -k.lapse_1m, type: 'down' }, { n: '미갱신 6개월·1년', v: -k.lapse_long, type: 'down' },
+    { n: '지연 갱신', v: k.late, type: k.late >= 0 ? 'up' : 'down' }, { n: '분기말', v: k.end, type: 'total' },
+  ];
+  let acc = 0;
+  steps.forEach((s) => { if (s.type === 'total') { s.y0 = 0; s.y1 = s.v; acc = s.v; } else { s.y0 = acc; acc += s.v; s.y1 = acc; } });
+  const W = box.clientWidth || 600, H = 260, m = { t: 22, r: 6, b: 42, l: 28 };
+  box.querySelectorAll('svg').forEach((s) => s.remove());
+  const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', '분기 회원 흐름');
+  const x = d3.scaleBand(steps.map((s) => s.n), [m.l, W - m.r]).padding(0.3);
+  const top = d3.max(steps, (s) => Math.max(s.y0, s.y1));
+  const y = d3.scaleLinear([0, Math.ceil(top / 20) * 20 + 10], [H - m.b, m.t]);
+  svg.append('g').selectAll('line').data(y.ticks(4)).join('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y).attr('y2', y).attr('stroke', 'var(--cds-chart-grid)');
+  svg.append('g').selectAll('text').data(y.ticks(4)).join('text').attr('x', m.l - 6).attr('y', (v) => y(v) + 4).attr('text-anchor', 'end').attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text((v) => v);
+  const col = { total: 'var(--cds-chart-muted)', up: 'var(--cds-chart-status-good)', down: 'var(--cds-chart-status-critical)' };
+  svg.append('g').selectAll('rect').data(steps).join('rect').attr('x', (s) => x(s.n)).attr('width', x.bandwidth()).attr('y', (s) => y(Math.max(s.y0, s.y1))).attr('height', (s) => Math.max(2, Math.abs(y(s.y0) - y(s.y1)))).attr('rx', 3).attr('fill', (s) => col[s.type]).attr('fill-opacity', (s) => (s.type === 'total' ? 1 : 0.75));
+  svg.append('g').selectAll('text').data(steps).join('text').attr('x', (s) => x(s.n) + x.bandwidth() / 2).attr('y', (s) => y(Math.max(s.y0, s.y1)) - 6).attr('text-anchor', 'middle').attr('font-size', 12).attr('font-weight', (s) => (s.type === 'total' ? 600 : 400)).attr('fill', 'var(--color-fg)').text((s) => (s.type === 'total' ? s.v : signed(s.v)));
+  const narrow = x.bandwidth() < 60;
+  svg.append('g').selectAll('text').data(steps).join('text').attr('x', (s) => x(s.n) + x.bandwidth() / 2).attr('y', H - m.b + 15).attr('text-anchor', 'middle').attr('font-size', 10).attr('fill', 'var(--color-fg-muted)')
+    .each(function (s) {
+      const parts = narrow ? s.n.split(' ') : [s.n];
+      parts.forEach((p, i) => d3.select(this).append('tspan').attr('x', x(s.n) + x.bandwidth() / 2).attr('dy', i ? 12 : 0).text(p));
+    });
+}
+
+function fillTable(id, rows, cols, keyCol) {
+  const tb = document.querySelector('#' + id + ' tbody');
+  tb.replaceChildren();
+  rows.forEach((r) => {
+    const tr = document.createElement('tr');
+    if (keyCol) tr.dataset.key = r[keyCol];
+    cols.forEach(([k, cls, f]) => {
+      const td = document.createElement('td'); if (cls) td.className = cls;
+      const v = f ? f(r) : r[k];
+      if (v instanceof Node) td.appendChild(v); else td.textContent = v;
+      tr.appendChild(td);
+    });
+    tb.appendChild(tr);
+  });
+}
+const pill = (text, cls) => { const s = document.createElement('span'); s.className = 'pm-pill ' + (cls || ''); s.textContent = text; return s; };
+
+function hbars(boxId, rows, label, valueText, colorFn, height) {
+  const box = document.getElementById(boxId);
+  const W = box.clientWidth || 400, rowH = 34, H = height || rows.length * rowH + 10;
+  box.querySelectorAll('svg').forEach((s) => s.remove());
+  const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+  const lw = Math.min(W * 0.45, d3.max(rows, (r) => measure(svg, label(r), 12)) + 10);
+  const vw = d3.max(rows, (r) => measure(svg, valueText(r), 12)) + 8;
+  const x = d3.scaleLinear([0, 1], [lw, W - vw]);
+  const y = d3.scaleBand(rows.map((r, i) => i), [4, H - 4]).padding(0.35);
+  const g = svg.selectAll('g').data(rows).join('g');
+  g.append('text').attr('x', 0).attr('y', (r, i) => y(i) + y.bandwidth() / 2 + 4).attr('font-size', 12).attr('fill', 'var(--color-fg)').text(label);
+  g.append('rect').attr('x', lw).attr('y', (r, i) => y(i)).attr('width', W - vw - lw).attr('height', y.bandwidth()).attr('rx', 4).attr('fill', 'var(--cds-chart-grid)');
+  g.append('rect').attr('x', lw).attr('y', (r, i) => y(i)).attr('width', (r) => Math.max(2, x(r.rate) - lw)).attr('height', y.bandwidth()).attr('rx', 4).attr('fill', colorFn);
+  g.append('text').attr('x', W - vw + 6).attr('y', (r, i) => y(i) + y.bandwidth() / 2 + 4).attr('font-size', 12).attr('font-weight', 600).attr('fill', 'var(--color-fg)').text(valueText);
+  return svg;
+}
+
+function drawCohort() {
+  const box = document.getElementById('chart-cohort');
+  const d = dash.data('cohorts');
+  if (d.status === 'error') return failLine(box);
+  if (d.status !== 'ok') { box.replaceChildren(); return; }
+  const rows = d.data.map((r) => ({ label: r.label, v: +r.new_paid }));
+  const W = box.clientWidth || 600, H = 200, m = { t: 22, r: 4, b: 26, l: 4 };
+  box.querySelectorAll('svg').forEach((s) => s.remove());
+  const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', '연도별 새 유료 회원');
+  const x = d3.scaleBand(rows.map((r) => r.label), [m.l, W - m.r]).padding(0.4);
+  const y = d3.scaleLinear([0, d3.max(rows, (r) => r.v)], [H - m.b, m.t]);
+  svg.selectAll('rect').data(rows).join('rect').attr('x', (r) => x(r.label)).attr('width', Math.min(x.bandwidth(), 64)).attr('transform', `translate(${Math.max(0, (x.bandwidth() - 64) / 2)},0)`).attr('y', (r) => y(r.v)).attr('height', (r) => y(0) - y(r.v)).attr('rx', 4).attr('fill', (r, i) => (i === rows.length - 1 ? 'var(--pm-accent)' : 'var(--cds-chart-muted)'));
+  svg.selectAll('text.v').data(rows).join('text').attr('class', 'v').attr('x', (r) => x(r.label) + x.bandwidth() / 2).attr('y', (r) => y(r.v) - 6).attr('text-anchor', 'middle').attr('font-size', 12).attr('font-weight', 600).attr('fill', 'var(--color-fg)').text((r) => r.v + '명');
+  svg.selectAll('text.l').data(rows).join('text').attr('class', 'l').attr('x', (r) => x(r.label) + x.bandwidth() / 2).attr('y', H - 8).attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text((r) => r.label);
+}
+
+function draw() {
+  const q = dash.params().q || '2026-Q3';
+  root.querySelectorAll('.pm-seg button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.q === q)));
+  root.querySelectorAll('.pm-chip').forEach((c) => c.setAttribute('aria-pressed', String(c.dataset.g ? c.dataset.g === gSel : c.dataset.s === sSel)));
+  document.getElementById('pm-sub').textContent = `${qName(q)} (${q.slice(0, 4)}년 7~9월) · 결제 기록 기준 · 무료·예외 회원 제외`;
+  root.querySelector('.tq').textContent = qName(q);
+
+  const K = dash.data('kpi');
+  const kRows = K.status === 'ok' ? K.data : [];
+  const k = kRows.find((r) => r.quarter === q), o = kRows.find((r) => r.quarter === other(q));
+  root.querySelectorAll('[data-source="kpi"][data-field]').forEach((el) => {
+    el.setAttribute('data-where', 'quarter=' + q);
+    if (!k) return;
+    el.classList.remove('dash-skeleton');
+    const f = el.dataset.field;
+    const v = k[f];
+    if (el.classList.contains('cmp')) {
+      el.setAttribute('data-where', 'quarter=' + other(q));
+      el.textContent = o ? `${qName(other(q))} ${f === 'net' ? signed(o[f]) : fmt(o[f])}명` : '';
+    } else if (f === 'net' || f === 'late') el.textContent = signed(v);
+    else el.textContent = fmt(v);
+  });
+  root.querySelectorAll('#chart-wf').forEach((el) => el.setAttribute('data-where', 'quarter=' + q));
+
+  if (printAll || tab === 'overview') {
+    drawTrend(q); drawHs(q);
+    const P = dash.data('plan_cmp');
+    const tbl = document.getElementById('tbl-plan');
+    const thisKey = q === '2026-Q3' ? 'y2026' : 'y2025', otherKey = q === '2026-Q3' ? 'y2025' : 'y2026';
+    const ths = tbl.querySelectorAll('th');
+    ths[1].dataset.field = thisKey; ths[2].dataset.field = otherKey;
+    ths[1].textContent = qName(q) + ' 말'; ths[2].textContent = qName(other(q)) + ' 말';
+    fillTable('tbl-plan', P.status === 'ok' ? P.data : [], [['plan'], [thisKey, 'n', (r) => r[thisKey] + '명'], [otherKey, 'n', (r) => r[otherKey] + '명']]);
+  }
+  if (printAll || tab === 'flow') {
+    drawWf(k);
+    const F = dash.data('flow');
+    const fr = (F.status === 'ok' ? F.data : []).filter((r) => r.quarter === q).sort((a, b) => a.month.localeCompare(b.month));
+    fillTable('tbl-flow', fr, [['month', '', (r) => r.month], ['start', 'n'], ['new', 'n'], ['rejoin', 'n'], ['lapse_1m', 'n'], ['lapse_long', 'n'], ['late_out', 'n'], ['late_in', 'n'], ['end', 'n']]);
+    const has = q === '2026-Q3';
+    ['joins', 'lapses'].forEach((n) => { document.getElementById('tbl-' + n).hidden = !has; document.getElementById(n + '-empty').hidden = has; });
+    const J = dash.data('joins'), L = dash.data('lapses');
+    fillTable('tbl-joins', has && J.status === 'ok' ? J.data : [], [['name'], ['kind', '', (r) => pill(r.kind, r.kind === '신규' ? 'new' : '')], ['month', '', (r) => r.month], ['plan'], ['note']]);
+    fillTable('tbl-lapses', has && L.status === 'ok' ? L.data : [], [['name'], ['month', '', (r) => r.month], ['plan'], ['note']], 'key');
+  }
+  if (printAll || tab === 'watch') {
+    const Wd = dash.data('watch');
+    const rows = (Wd.status === 'ok' ? Wd.data : []).filter((r) => (gSel === 'all' || r.group === gSel) && (sSel === 'all' || r.status === sSel));
+    fillTable('tbl-watch', rows, [['name', 'name'], ['group', 'grp', (r) => pill(r.group, r.group === '신규' ? 'new' : '')], ['plan', 'plan'], ['renew', 'renew', (r) => r.renew], ['status', 'st', (r) => pill(r.status, r.status === '유지 중' ? 'ok' : 'end')], ['last_program', 'last', (r) => (r.last_date ? r.last_date + ' ' : '') + r.last_program], ['note', 'note']]);
+    document.getElementById('watch-count').textContent = Wd.status === 'ok' ? `${rows.length}명 표시 · 전체 ${Wd.data.length}명` : '';
+  }
+  if (printAll || tab === 'analysis') {
+    const R = dash.data('ret_rate'), Rt = dash.data('route_rate');
+    if (R.status === 'ok') hbars('chart-ret', R.data, (r) => r.segment, (r) => d3.format('.0%')(r.rate) + ` (${r.retained}/${r.members}명)`, (r) => (r.group === '참여 횟수' ? 'var(--pm-accent)' : 'var(--pm-6m)'));
+    else if (R.status === 'error') failLine(document.getElementById('chart-ret'));
+    if (Rt.status === 'ok') hbars('chart-route', [...Rt.data].sort((a, b) => b.rate - a.rate), (r) => r.route, (r) => d3.format('.0%')(r.rate) + ` · 현재 ${r.current}명`, (r, i) => (i === 0 ? 'var(--pm-accent)' : 'var(--cds-chart-muted)'));
+    else if (Rt.status === 'error') failLine(document.getElementById('chart-route'));
+    drawCohort();
+  }
+}
+
+dash.onData(draw);
+window.__pmPrint = (on) => {
+  printAll = on;
+  root.classList.toggle('pm-printing', on);
+  root.querySelectorAll('details.pm-def').forEach((d) => { d.open = on; });
+  root.querySelectorAll('[data-page]').forEach((p) => { p.hidden = !on && p.dataset.page !== tab; });
+  draw();
+};
+window.addEventListener('beforeprint', () => window.__pmPrint(true));
+window.addEventListener('afterprint', () => window.__pmPrint(false));
+const start = location.hash.slice(1);
+showTab(['overview', 'flow', 'watch', 'analysis'].includes(start) ? start : 'overview', false);
+</script>
+
+</body>
+</html>
