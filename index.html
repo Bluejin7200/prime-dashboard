@@ -99,7 +99,7 @@ window.__PM_DATA = {"monthly": [{"month": "2025-01", "m1": 23, "m6": 15, "m12": 
 @media (max-width: 420px) { .pm-tabs button { font-size: 0.8rem; padding: 10px 2px; } }
 .pm-page { display: grid; gap: var(--cds-gap-lg); }
 .pm [hidden] { display: none !important; }
-.pm-title, .pm-take, .pm-note, .pm-card h2 { word-break: keep-all; }
+.pm-title, .pm-sub, .pm-take, .pm-note, .pm-card h2 { word-break: keep-all; }
 @media (max-width: 560px) { .pm-kpis { grid-template-columns: 1fr 1fr; } .pm-kpis .pm-kpi:first-child { grid-column: 1 / -1; } }
 .pm-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr)); gap: var(--cds-gap-md); }
 .pm-kpi { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-md); display: grid; gap: 4px; align-content: start; }
@@ -137,6 +137,17 @@ window.__PM_DATA = {"monthly": [{"month": "2025-01", "m1": 23, "m6": 15, "m12": 
 .pm-def summary { cursor: pointer; color: var(--color-fg); }
 .pm-head-right { display: grid; gap: 10px; justify-items: end; width: max-content; max-width: 100%; }
 .pm-head-right .pm-seg-wrap { justify-self: stretch; }
+.pm-head-right .pm-seg-wrap { justify-items: end; }
+@media (max-width: 560px) {
+  .pm-head { flex-direction: column; align-items: center; text-align: center; }
+  .pm-brand { grid-template-columns: 1fr; justify-items: center; row-gap: 6px; }
+  .pm-brand img { grid-column: 1; grid-row: auto; width: 36px; height: 36px; }
+  .pm-brand .pm-title { grid-column: 1; grid-row: auto; white-space: nowrap; font-size: clamp(1.15rem, 5.6vw, 1.5rem); }
+  .pm-brand .pm-sub, .pm-brand .pm-src { grid-column: 1; justify-self: center; }
+  .pm-head-right { width: 100%; justify-items: center; }
+  .pm-head-right .pm-seg-wrap { justify-self: center; justify-items: center; }
+}
+
 .pm-pdf { display: inline-flex; align-items: center; gap: 6px; font-size: var(--cds-font-size-caption); font-weight: 600; color: #2b2b2b; background: #ffffff; border-radius: 999px; padding: 7px 14px; text-decoration: none; }
 .pm-pdf:hover { background: #dbb6ff; }
 .pm-pdf svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
